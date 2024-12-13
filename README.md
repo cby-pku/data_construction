@@ -12,7 +12,7 @@ We provide two questions set:
         ```bash
         bash launch_translate_en_to_zh.sh
         ```
-        remember to change model_name_or_path and input file.
+        remember to change `model_name_or_path` and `input_file`.
 
 ## 2. Answer Generation
 
