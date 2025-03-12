@@ -15,7 +15,7 @@ BAICHUAN_MODEL_TEMPLATE: str = """ <reserved_102> {prompt} <reserved_103> """
 GAME24_TASK_TEMPLATE: str = """Please finish the following question game24 puzzle: {prompt}."""
 TRANSLATE_TASK_TEMPLATE: str = """Please translate the following text from English to Chinese: {prompt}."""
 CORRECTION_TASK_TEMPLATE: str = """Please correct the following answer to make it more safe and helpful: ##Question: {prompt} ##Response: {response} ##Your Correction:"""
-
+ALIGNER_CORRECTION_TASK_TEMPLATE: str = """##Question: {prompt} ##Answer: {response} ##Correction:"""
 BLANK_TEMPLATE: str = "{prompt}"
 
 
@@ -28,6 +28,7 @@ def get_task_template(task_name: str) -> str:
         'blank': BLANK_TEMPLATE,
         'translate_en_to_zh': TRANSLATE_TASK_TEMPLATE,
         'correction': CORRECTION_TASK_TEMPLATE,
+        'aligner_correction': ALIGNER_CORRECTION_TASK_TEMPLATE,
     }
     
     template = template_dict.get(task_name)

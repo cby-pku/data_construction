@@ -5,13 +5,13 @@ model_list=(
     # you can replace it with other models
     # or add more models below
     # /cpfs/user/boyuan/models/glm/glm-4-9b-chat
-    /cpfs/user/boyuan/models/yi/Yi-1.5-34B-Chat
+    /aifs4su/yaodong/spring_r1_model/Yi-1.5-34B-Chat
 )
 
 # 动态设置所有可用的GPU
 export CUDA_VISIBLE_DEVICES="0,1,2,3"
 
-INPUTFILE="/cpfs/user/boyuan/workspace/aligner-reproduce/dataset/aligner_zh_20k/zh_prompts.json"
+INPUTFILE="/aifs4su/yaodong/spring_r1/boyuan_eval/align-anything/aligner_workspace/data_construction/questions/safe_question_set.json"
 # INPUTFILE="/cpfs/user/boyuan/workspace/aligner-reproduce/generate_scripts/test/daily_dialogue_test.json"
 
 NUM_RESPONSES=1
@@ -23,7 +23,7 @@ for model in "${model_list[@]}"; do
 
     model_name="${model##*/}"
     echo ${model_name}'.json'
-    OUTPUT_DIR="/cpfs/user/boyuan/workspace/aligner-reproduce/dataset/aligner_zh_20k" # model name to change
+    OUTPUT_DIR="/aifs4su/yaodong/spring_r1/boyuan_eval/align-anything/aligner_workspace/test_dataset/qa" # model name to change
     # OUTPUT_DIR="/cpfs/user/boyuan/workspace/aligner-reproduce/generate_scripts/test" # model name to change
     OUTPUT_NAME=${model_name} # model name to change
 

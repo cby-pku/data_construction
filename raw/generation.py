@@ -85,8 +85,8 @@ def prepare_questions(questions: list[str], task_template: str, model_template: 
         if 'prompt' not in entry and 'question' not in entry:
             raise ValueError(f"Questions Preparation Error: Key of 'prompt' or 'question' is missing in entry: {entry}")
         # prompt = get_task_template(task_template).format(prompt=entry.get('prompt', entry.get('question')))
-        if task_template == 'correction':
-            prompt = get_task_template(task_template).format(prompt=entry.get('prompt', entry.get('question')), response=entry.get('answer'))
+        if task_template == 'correction' or task_template == 'aligner_correction':
+            prompt = get_task_template(task_template).format(prompt=entry.get('prompt', entry.get('question')), response=entry.get('answer',entry.get('completion')))
         else:
             prompt = get_task_template(task_template).format(prompt=entry.get('prompt', entry.get('question'))) 
         process_prompt = get_model_template(prompt, model_template, model_name_or_path)
@@ -130,7 +130,10 @@ def generate_answer_by_vllm(problems: list[str], model_name_or_path: str, num_re
         prompt = output.prompt
         for i in range(num_responses):
             answer_dict = entry.copy()
-            answer_dict['completion'] = output.outputs[i].text
+            if task_template == 'aligner_correction':
+                answer_dict['correction'] = output.outputs[i].text
+            else:
+                answer_dict['completion'] = output.outputs[i].text
             answers.append(answer_dict)
     return answers
 
